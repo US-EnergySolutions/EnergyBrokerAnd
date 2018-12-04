@@ -15,6 +15,6 @@
     <!-- Main Activity Colors -->
     <color name="login_edit_text_text_color">@android:color/black</color>
     <color name="login_edit_text_hint_color">@android:color/darker_gray</color>
-    <color name="login_button_press">@color/textColorPrimary</color>
-    <color name="login_button_normal">@color/white</color>
+    <drawable name="login_button_press">@color/textColorPrimary</drawable>
+    <drawable name="login_button_normal">@color/white</drawable>
 </resources>

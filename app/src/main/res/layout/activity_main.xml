@@ -23,6 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:imeOptions="actionNext"
+                android:hint="@string/login_userneme_edit_text_hint"
                 style="@style/loginEditTextStyle"/>
 
         <EditText
@@ -31,6 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/loginUserName"
                 android:inputType="textPassword"
+                android:hint="@string/login_password_edit_text_hint"
                 android:imeOptions="actionSend"
                 style="@style/loginEditTextStyle"/>
 
