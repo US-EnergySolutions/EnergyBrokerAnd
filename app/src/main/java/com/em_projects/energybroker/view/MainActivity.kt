@@ -2,17 +2,17 @@ package com.em_projects.energybroker.view
 
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Button
 import android.widget.EditText
-import com.em_projects.energybroker.utils.AppUtils
 import android.widget.TextView
 import android.widget.Toast
 import com.em_projects.energybroker.R
+import com.em_projects.energybroker.utils.AppUtils
 import com.em_projects.energybroker.viewmodel.SignInViewModel
 
 
@@ -48,11 +48,13 @@ class MainActivity : AppCompatActivity() {
             override fun onClick(v: View?) {
                 var usr = loginUserName.text.toString()
                 var pwd = loginPassword.text.toString()
-                if (!usr.isEmpty() && pwd.isEmpty())  {
+                if (!usr.isEmpty() && !pwd.isEmpty()) {
                     // TODO
                 } else {
-                    Toast.makeText(this@MainActivity,
-                        R.string.login_missing_credentials, Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        this@MainActivity,
+                        R.string.login_missing_credentials, Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
 
