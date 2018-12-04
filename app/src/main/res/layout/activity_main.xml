@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        style="@style/MainActivityTheme"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.MainActivity"
+        android:fillViewport="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+    <RelativeLayout
+            android:id="@+id/loginFormLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp">
+
+        <EditText
+                android:id="@+id/loginUserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                style="@style/loginEditTextStyle"/>
+
+        <EditText
+                android:id="@+id/loginPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/loginUserName"
+                android:inputType="textPassword"
+                android:imeOptions="actionSend"
+                style="@style/loginEditTextStyle"/>
+
+        <Button
+                android:id="@+id/loginSignInButton"
+                style="@style/loginAppButton"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@id/loginPassword"
+                android:text="@string/login_sign_in"/>
+
+        <Button
+                android:id="@+id/loginRegisterButton"
+                style="@style/loginAppButton"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/loginPassword"
+                android:text="@string/login_register"/>
+    </RelativeLayout>
+
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/loginFormLayout"
+            android:src="@drawable/alfa_romeo_logo"/>
+
+    <TextView
+            android:id="@+id/version_number"
+            style="@style/AppTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:padding="5dp"/>
+
+</RelativeLayout>

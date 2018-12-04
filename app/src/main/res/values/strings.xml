@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">EnergyBroker</string>
+
+    <!-- Splash String -->
+    <string name="app_version_format" translatable="false">Version v %s (%d) </string>
+    <string name="login_userneme_edit_text_hint">Username Or Email</string>
+    <string name="login_password_edit_text_hint">Password</string>
+    <string name="login_sign_in">Sign In</string>
+    <string name="login_register">Register</string>
+    <string name="login_missing_credentials">Missing Credentials</string>
+
+</resources>

@@ -1,0 +1,55 @@
+<resources>
+
+    <!-- Base application theme -->
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+        <!-- Customize your theme here -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorControlActivated">@color/colorControlActivated</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:textColorHint">@color/HintColor</item>
+    </style>
+
+    <!-- Main Activity Theme -->
+    <style name="MainActivityTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <!-- App Text View -->
+    <style name="AppTextView">
+        <item name="android:textColor">@color/textColorPrimary</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+
+    <!-- Login Edit Text Style -->
+    <style name="loginEditTextStyle">
+        <item name="android:textSize">@dimen/login_edit_text_text_size</item>
+        <item name="android:textColor">@color/login_edit_text_text_color</item>
+        <item name="android:textColorHint">@color/login_edit_text_hint_color</item>
+        <item name="android:background">@drawable/login_edittext_bg</item>
+        <item name="android:padding">@dimen/login_edit_text_padding</item>
+        <item name="android:layout_margin">10dp</item>
+    </style>
+
+    <!-- Login App Button -->
+    <style name="loginAppButton">
+        <item name="android:layout_width">@dimen/login_button_width</item>
+        <item name="android:layout_height">@dimen/login_button_height</item>
+        <item name="android:background">@drawable/login_button_bg_color_selector</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:layout_margin">10dp</item>
+    </style>
+
+    <!-- Base application theme. -->
+    <style name="AppThemeOrg" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+</resources>
