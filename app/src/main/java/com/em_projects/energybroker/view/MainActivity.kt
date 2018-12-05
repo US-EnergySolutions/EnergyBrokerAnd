@@ -2,6 +2,7 @@ package com.em_projects.energybroker.view
 
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.KeyEvent
@@ -49,7 +50,11 @@ class MainActivity : AppCompatActivity() {
                 var usr = loginUserName.text.toString()
                 var pwd = loginPassword.text.toString()
                 if (!usr.isEmpty() && !pwd.isEmpty()) {
-                    // TODO
+                    val intent: Intent = Intent(context, MapActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    startActivity(intent)
+                    overridePendingTransition(R.anim.activity_slide_in, R.anim.activity_slide_out);
+                    finish()
                 } else {
                     Toast.makeText(
                         this@MainActivity,
