@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,14 +19,13 @@ import android.widget.Toast;
 import com.em_projects.energybroker.R;
 import com.em_projects.energybroker.config.Constants;
 import com.em_projects.energybroker.services.location.locationListenerService;
+import com.em_projects.energybroker.view.map.adapters.CustomInfoWindowGoogleMap;
+import com.em_projects.energybroker.view.map.model.InfoWindowData;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.PointOfInterest;
+import com.google.android.gms.maps.model.*;
 import pub.devrel.easypermissions.AppSettingsDialog;
 import pub.devrel.easypermissions.EasyPermissions;
 
@@ -78,11 +78,32 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
+        setStyle(map);
+        map.getUiSettings().setZoomControlsEnabled(true);
+        map.setMinZoomPreference(11);
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lat, lng), zoom));
         setMapLongClick(map);
-        setPoiClick(map);
+//        setPoiClick(map);
         setMapClick(map);
+        setOnInfoWindowClickListener(map);
+        setOnMarkerClickListener(map);
         updateMap(lat, lng);
+    }
+
+    private void setStyle(GoogleMap map) {
+        try {
+            // Customize the styling of the base map using a JSON object defined
+            // in a raw resource file.
+            boolean success = map.setMapStyle(
+                    MapStyleOptions.loadRawResourceStyle(
+                            this, R.raw.map_style));
+
+            if (!success) {
+                Log.e(TAG, "Style parsing failed.");
+            }
+        } catch (Resources.NotFoundException e) {
+            Log.e(TAG, "Can't find style. Error: ", e);
+        }
     }
 
     private void updateMap(double lat, double lng) {
@@ -94,6 +115,36 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
     }
 
+    private void setOnMarkerClickListener(final GoogleMap map) {
+        map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                InfoWindowData info = new InfoWindowData();
+                info.setImage(marker.getTitle());
+                info.setHotel("Hotel : " + marker.getPosition().toString());
+                info.setFood("Food : ");
+                info.setTransport("Reach ");
+
+                CustomInfoWindowGoogleMap customInfoWindow = new CustomInfoWindowGoogleMap(context);
+                map.setInfoWindowAdapter(customInfoWindow);
+                marker.setTag(info);
+                marker.showInfoWindow();
+                return true;
+            }
+        });
+    }
+
+    private void setOnInfoWindowClickListener(GoogleMap map) {
+        map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                Toast.makeText(context, "Info Window Click " + marker.getPosition().toString(),
+                        Toast.LENGTH_SHORT).show();
+                marker.hideInfoWindow();
+            }
+        });
+    }
+
     private void setMapLongClick(final GoogleMap map) {
         map.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
             @Override
@@ -103,7 +154,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         latLng.latitude,
                         latLng.longitude);
 
-                if (marker != null) marker.remove();
+                // if (marker != null) marker.remove();
                 marker = map.addMarker(new MarkerOptions()
                         .position(latLng)
                         .title(getString(R.string.dropped_pin))
@@ -129,6 +180,25 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             @Override
             public void onMapClick(LatLng latLng) {
                 Toast.makeText(context, "lat: " + latLng.latitude + "\nlng: " + latLng.longitude, Toast.LENGTH_SHORT).show();
+//                LatLng snowqualmie = new LatLng(47.5287132, -121.8253906);
+                MarkerOptions markerOptions = new MarkerOptions();
+                markerOptions.position(latLng)
+                        .title("Snowqualmie Falls")
+                        .snippet("Snoqualmie Falls is located 25 miles east of Seattle.")
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+
+                InfoWindowData info = new InfoWindowData();
+                info.setImage("snowqualmie");
+                info.setHotel("Hotel : excellent hotels available" + latLng.toString());
+                info.setFood("Food : all types of restaurants available");
+                info.setTransport("Reach the site by bus, car and train.");
+
+                CustomInfoWindowGoogleMap customInfoWindow = new CustomInfoWindowGoogleMap(context);
+                map.setInfoWindowAdapter(customInfoWindow);
+
+                Marker m = map.addMarker(markerOptions);
+                m.setTag(info);
+                m.showInfoWindow();
             }
         });
     }
